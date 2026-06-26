@@ -1,0 +1,17 @@
+namespace: cicd-app-dev
+nameOverride: frontend
+
+replicaCount: 1
+
+nodeSelector:
+  app:
+    role: app
+
+image:
+  repository: distefano119/cicd-app-frontend
+  tag: frontend-v1.0.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5173
