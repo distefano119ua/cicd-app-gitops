@@ -1,0 +1,27 @@
+namespace: cicd-app-dev
+nameOverride: nginx
+
+replicaCount: 1
+
+nodeSelector:
+  app:
+    role: app
+
+image:
+  repository: nginx
+  tag: 1.27-alpine
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30080
+
+upstream:
+  frontend:
+    host: frontend
+    port: 80
+  backend:
+    host: backend-cars
+    port: 7000
