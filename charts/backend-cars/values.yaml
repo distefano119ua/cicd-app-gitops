@@ -1,22 +1,21 @@
 namespace: cicd-app-dev
 name: backend-cars
+nameOverride: "backend-cars"
 
 replicaCount: 1
+
+nodeSelector:
+  app:
+    role: app
 
 image:
   repository: distefano119/cicd-app-backend-cars
   tag: backend-cars-v1.0.0
   pullPolicy: IfNotPresent
 
-nameOverride: "backend-cars"
-
 service:
   type: ClusterIP
   port: 7000
-
-nodeSelector:
-  app:
-    role: app
 
 config:
   APP_LOGS_PATH: "/app/logs"

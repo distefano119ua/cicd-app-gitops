@@ -1,0 +1,25 @@
+namespace: cicd-app-dev
+name: mongodb
+nameOverride: "mongodb"
+
+replicaCount: 1
+
+nodeSelector:
+  db:
+    role: db
+
+image:
+  repository: mongo
+  tag: "7"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 27017
+
+storage:
+  className: local-storage
+  size: 10Gi
+  path: /etc/kubernetes/mongodb
+  pvName: mongo-pv
+  pvcName: mongo-pvc
