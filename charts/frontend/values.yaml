@@ -14,4 +14,4 @@ image:
 
 service:
   type: ClusterIP
-  port: 5173
+  port: 80
