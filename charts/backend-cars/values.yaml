@@ -9,7 +9,7 @@ nodeSelector:
     role: app
 
 image:
-  repository: distefano119/cicd-app-backend-cars
+  repository: https://github.com/distefano119ua/cicd-app-gitops.git
   tag: backend-cars-v1.0.0
   pullPolicy: IfNotPresent
 
