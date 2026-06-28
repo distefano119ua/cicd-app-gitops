@@ -223,7 +223,7 @@ annotations:
 git push backend-cars-v1.0.2
 git push origin backend-cars-v1.0.2
 ```
-
-GitOps-інструмент синхронізує Kubernetes.
-
-Deployment оновлюється до нового image.
+- GitOps-інструмент синхронізує Kubernetes.
+![image3](./screenshot/bkend-cars-update.png)
+- Deployment оновлюється до нового image.
+![image4](./screenshot/bkend-cars-events.png)
