@@ -176,3 +176,35 @@ Flux працює за моделлю **distributed agents** — кожен кл
 
 ---
 
+## Тепер все разом: CI + CD
+
+До цього було завдання, де має бути CI workflow і для цього я зробив окремий репозиторій, як має бути в нормальній розробці. Посилання до [репозиторію](https://github.com/distefano119ua/cicd-app)
+
+Встановити GitOps-інструмент у Kubernetes
+
+```
+dimitr@k8s-master:~$ kubectl get pods -n argocd
+NAME                                                READY   STATUS    RESTARTS      AGE
+argocd-application-controller-0                     1/1     Running   2 (13m ago)   5d22h
+argocd-applicationset-controller-78d66cfd5b-pcsjr   1/1     Running   2 (13m ago)   5d22h
+argocd-dex-server-795b9b7569-gcqpw                  1/1     Running   2 (13m ago)   5d22h
+argocd-notifications-controller-85db9b54dd-lk5dv    1/1     Running   2 (13m ago)   5d22h
+argocd-redis-5c7789bdf-ldbwl                        1/1     Running   2 (13m ago)   5d22h
+argocd-repo-server-7fc45d4895-xkn68                 1/1     Running   2 (13m ago)   4d19h
+argocd-server-78bf4dfbcb-vnjnz                      1/1     Running   2 (13m ago)   5d22h
+```
+
+Як виглядає рішення в Argocd:
+
+![img](./screenshot/argocd.png)
+
+На скріншоті можете помітити **itoutposts**, який знаходиться в іншому `namespace`: `argocd`, як саме наш CD інстурмент ArgoCD - це **App of Apps**. [Він](./argocd/cicd-app-dev-root.yaml) відповідальний за всі частини нашого застосунку, які запускає автоматично, а не кожну частину окремо руцями!
+
+Додатково нагадаю, що моє рішення має запускатися в певному порядку:
+`mongodb ---> backend-cars ---> frontend ---> nginx`
+
+Тому було додано в кожний [app](./argocd/dev/) наступне налаштування:
+```YAML
+annotations:
+  argocd.argoproj.io/sync-wave: "<int>"
+```
