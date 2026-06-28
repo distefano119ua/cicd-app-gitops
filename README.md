@@ -209,3 +209,21 @@ argocd-server-78bf4dfbcb-vnjnz                      1/1     Running   2 (13m ago
 annotations:
   argocd.argoproj.io/sync-wave: "<int>"
 ```
+
+
+## Очікуваний результат:
+
+- CI пушить новий image tag у registry (подивіться у workflow, там в кінці є інструкція).
+- Image automation бачить новий tag.
+- Git manifest автоматично оновлюється.
+![image2](./screenshot/ci-registry.png)
+
+Але все почалося з:
+```
+git push backend-cars-v1.0.2
+git push origin backend-cars-v1.0.2
+```
+
+GitOps-інструмент синхронізує Kubernetes.
+
+Deployment оновлюється до нового image.
