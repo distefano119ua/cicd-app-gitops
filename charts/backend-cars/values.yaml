@@ -10,7 +10,7 @@ nodeSelector:
 
 image:
   repository: distefano119/cicd-app-backend-cars
-  tag: backend-cars-v1.0.0
+  tag: backend-cars-v1.0.2
   pullPolicy: IfNotPresent
 
 service:
